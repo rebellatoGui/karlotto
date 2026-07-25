@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="k-gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e4c07f" />
+      <stop offset="1" stop-color="#c9a45e" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#1b1815" />
+  <rect width="64" height="64" rx="14" fill="none" stroke="#3a332c" stroke-width="1" />
+  <text
+    x="50%"
+    y="53%"
+    text-anchor="middle"
+    dominant-baseline="central"
+    font-family="'Big Shoulders Display', 'Arial Narrow', sans-serif"
+    font-weight="800"
+    font-size="42"
+    fill="url(#k-gold)">K</text>
+</svg>

@@ -1,12 +1,6 @@
-/* ==========================================================================
-   Karl'Otto — Limpeza, Polimento e Pintura
-   Sistema: pedra + porcelanato + latão satinado
-   ========================================================================== */
-
 @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 :root {
-  /* Cor — pedra, porcelana, latão, água */
   --charcoal: #1b1815;
   --charcoal-soft: #251f1a;
   --charcoal-line: #3a332c;
@@ -23,7 +17,6 @@
   --whats-bright: #2f9457;
   --ink: #171310;
 
-  /* Tipografia */
   --font-display: 'Big Shoulders Display', 'Arial Narrow', sans-serif;
   --font-body: 'Work Sans', system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
@@ -36,7 +29,6 @@
   --fs-small: 0.875rem;
   --fs-label: 0.75rem;
 
-  /* Espaçamento */
   --space-1: 0.5rem;
   --space-2: 1rem;
   --space-3: 1.5rem;
@@ -57,7 +49,6 @@
   --dur-med: 0.6s;
 }
 
-/* ---- Reset ---- */
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
@@ -113,9 +104,6 @@ h1, h2, h3, p { margin: 0; }
   opacity: 0.6;
 }
 
-/* ==========================================================================
-   Header
-   ========================================================================== */
 .site-header {
   position: fixed;
   inset: 0 0 auto 0;
@@ -157,7 +145,6 @@ h1, h2, h3, p { margin: 0; }
   color: var(--limestone);
 }
 
-/* ---- Botões ---- */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -184,9 +171,6 @@ h1, h2, h3, p { margin: 0; }
 .btn-ghost:hover { border-color: var(--brass); color: var(--brass-bright); }
 .btn-sm { padding: 0.6em 1.1em; font-size: 0.85rem; }
 
-/* ==========================================================================
-   Atmosfera — imagem de fundo fixa que dissolve ao rolar
-   ========================================================================== */
 .atmosphere {
   position: fixed;
   inset: 0;
@@ -210,9 +194,19 @@ h1, h2, h3, p { margin: 0; }
   .atmosphere__image { opacity: 0.6; transform: none; filter: saturate(0.85); }
 }
 
-/* ==========================================================================
-   Hero
-   ========================================================================== */
+.hero-gem {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: var(--atm-opacity, 1);
+}
+@media (max-width: 900px), (prefers-reduced-motion: reduce) {
+  .hero-gem { display: none; }
+}
+
 .hero {
   background: transparent;
   color: var(--porcelain);
@@ -231,6 +225,7 @@ h1, h2, h3, p { margin: 0; }
 }
 .hero .container {
   position: relative;
+  z-index: 1;
   display: grid;
   gap: var(--space-6);
 }
@@ -245,6 +240,7 @@ h1, h2, h3, p { margin: 0; }
   letter-spacing: -0.01em;
   margin: 0 0 var(--space-3);
 }
+.hero-title-line { display: block; overflow: hidden; }
 .hero-title em {
   font-style: normal;
   color: var(--brass-bright);
@@ -267,7 +263,6 @@ h1, h2, h3, p { margin: 0; }
   color: var(--limestone);
 }
 
-/* ---- Carrossel de serviços/máquinas ---- */
 .hero-carousel { position: relative; }
 .carousel-track {
   display: flex;
@@ -292,6 +287,7 @@ h1, h2, h3, p { margin: 0; }
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 .carousel-caption {
   position: absolute;
@@ -345,9 +341,6 @@ h1, h2, h3, p { margin: 0; }
   transform: scale(1.35);
 }
 
-/* ==========================================================================
-   Trust strip
-   ========================================================================== */
 .trust-strip {
   background: transparent;
   border-top: 1px solid var(--charcoal-line);
@@ -371,9 +364,6 @@ h1, h2, h3, p { margin: 0; }
 }
 .trust-strip svg { width: 1.1em; height: 1.1em; color: var(--brass); }
 
-/* ==========================================================================
-   Seções gerais
-   ========================================================================== */
 .section {
   padding-block: var(--space-12);
 }
@@ -385,6 +375,7 @@ h1, h2, h3, p { margin: 0; }
   max-width: 40rem;
   margin-bottom: var(--space-6);
 }
+.section-head--wide { max-width: 100%; }
 .section-head .eyebrow { margin-bottom: var(--space-2); }
 .section-dark .eyebrow, .section-petrol .eyebrow { color: var(--brass-bright); }
 .section-light .eyebrow { color: var(--brass-deep); }
@@ -403,7 +394,6 @@ h1, h2, h3, p { margin: 0; }
   max-width: 34rem;
 }
 
-/* ---- Reveal-on-scroll ---- */
 [data-reveal] {
   opacity: 0;
   transform: translateY(22px);
@@ -414,9 +404,75 @@ h1, h2, h3, p { margin: 0; }
   transform: translateY(0);
 }
 
-/* ==========================================================================
-   Serviços
-   ========================================================================== */
+[data-hero-anim] { opacity: 0; }
+.no-js [data-hero-anim],
+.reduce-motion [data-hero-anim] { opacity: 1; }
+
+.services-section { position: relative; overflow: hidden; color: var(--porcelain); }
+.services-section .container { position: relative; z-index: 1; }
+.services-section .eyebrow { color: var(--brass-bright); }
+.services-section .section-desc { color: var(--porcelain-dim); }
+.services-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.services-bg__layer {
+  position: absolute;
+  inset: -4% -4%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  will-change: opacity, transform;
+}
+.services-bg__layer:first-child { opacity: 1; }
+.services-bg__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    var(--charcoal) 0%,
+    rgba(27, 24, 21, 0.86) 14%,
+    rgba(27, 24, 21, 0.78) 50%,
+    rgba(27, 24, 21, 0.86) 86%,
+    var(--charcoal) 100%
+  );
+}
+@media (prefers-reduced-motion: reduce) {
+  .services-bg__layer { transition: none; }
+}
+
+.services-marquee {
+  position: relative;
+  z-index: 1;
+  transform: rotate(-1.2deg) scale(1.03);
+  background: var(--charcoal);
+  border-block: 1px solid var(--charcoal-line);
+  overflow: hidden;
+  white-space: nowrap;
+  margin-block: var(--space-6);
+  padding-block: 0.85em;
+  display: flex;
+}
+.services-marquee__track {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding-inline-end: 2ch;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: var(--porcelain);
+  will-change: transform;
+}
+.services-marquee__track span { padding-inline: 0.5ch; }
+.services-marquee__dot { color: var(--brass); font-size: 0.6em; vertical-align: middle; }
+@media (prefers-reduced-motion: reduce) {
+  .services-marquee__track { transform: none !important; }
+}
+
 .services-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -473,9 +529,6 @@ h1, h2, h3, p { margin: 0; }
 .service-card--wide { display: grid; grid-template-columns: 1fr 2fr; gap: var(--space-4); align-items: center; }
 .service-card--wide .service-icon { margin-bottom: 0; }
 
-/* ==========================================================================
-   Como funciona
-   ========================================================================== */
 .steps {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -508,9 +561,6 @@ h1, h2, h3, p { margin: 0; }
 }
 .step-text { color: var(--porcelain-dim); font-size: 0.95rem; }
 
-/* ==========================================================================
-   Diferenciais
-   ========================================================================== */
 .facts-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -529,9 +579,6 @@ h1, h2, h3, p { margin: 0; }
 }
 .fact-text { font-size: 0.9rem; opacity: 0.75; }
 
-/* ==========================================================================
-   CTA final
-   ========================================================================== */
 .cta-final {
   text-align: center;
 }
@@ -546,9 +593,6 @@ h1, h2, h3, p { margin: 0; }
 .cta-final .btn { font-size: 1.05rem; padding: 1em 2em; }
 .cta-final .hero-actions { justify-content: center; }
 
-/* ==========================================================================
-   Footer
-   ========================================================================== */
 .site-footer {
   background: var(--charcoal-soft);
   color: var(--limestone);
@@ -573,9 +617,6 @@ h1, h2, h3, p { margin: 0; }
   opacity: 0.6;
 }
 
-/* ==========================================================================
-   Botão flutuante WhatsApp
-   ========================================================================== */
 .float-whats {
   position: fixed;
   right: var(--space-3);
@@ -616,9 +657,6 @@ h1, h2, h3, p { margin: 0; }
   .carousel-track { scroll-behavior: auto; }
 }
 
-/* ==========================================================================
-   Responsivo
-   ========================================================================== */
 @media (max-width: 900px) {
   .services-grid { grid-template-columns: repeat(2, 1fr); }
   .service-card--feature { grid-template-columns: 1fr; }
