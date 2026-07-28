@@ -66,7 +66,7 @@
   }
 
   var gemCanvas = document.getElementById('heroGem');
-  if (gemCanvas && !reduceMotion && window.THREE && window.matchMedia('(min-width: 901px)').matches) {
+  if (gemCanvas && !reduceMotion && window.THREE) {
     try {
       var renderer = new THREE.WebGLRenderer({ canvas: gemCanvas, antialias: true, alpha: true });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
@@ -109,8 +109,10 @@
         renderer.setSize(w, h, false);
         camera.aspect = w / h;
         camera.updateProjectionMatrix();
-        gem.position.x = w > 1200 ? 3.6 : 2.6;
+        gem.position.x = 0;
         gem.position.y = 0.3;
+        var scale = w <= 480 ? 0.32 : w <= 900 ? 0.42 : 1;
+        gem.scale.setScalar(scale);
       }
       resizeGem();
       window.addEventListener('resize', resizeGem);

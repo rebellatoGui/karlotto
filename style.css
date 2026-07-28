@@ -203,7 +203,10 @@ h1, h2, h3, p { margin: 0; }
   pointer-events: none;
   opacity: var(--atm-opacity, 1);
 }
-@media (max-width: 900px), (prefers-reduced-motion: reduce) {
+@media (max-width: 900px) {
+  .hero-gem { opacity: calc(var(--atm-opacity, 1) * 0.55); }
+}
+@media (prefers-reduced-motion: reduce) {
   .hero-gem { display: none; }
 }
 
